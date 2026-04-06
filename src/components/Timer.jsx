@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useEffectEvent } from "react";
 
-export default function Timer({ onTimeOut, currentQuestionIndex }) {
-    const [timeLeft, setTimeLeft] = useState(15);
+export default function Timer({ onTimeOut, currentQuestionIndex, timePerQuestion }) {
+    const [timeLeft, setTimeLeft] = useState(timePerQuestion);
 
     useEffect(() => {
         setTimeLeft(15);
