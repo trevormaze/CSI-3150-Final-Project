@@ -3,6 +3,8 @@ export default function StartScreen({ setGameState, setScore, setNumberOfQuestio
     const [categoriesLoaded, setCategoriesLoaded] = useState(false);
     const [categories, setCategories] = useState([]);
 
+    const [error, setError] = useState(false);
+
     const handleStart = async () => {
         const numberOfQuestions = document.querySelector("#number").value;
         const category = document.querySelector("#category").value;
@@ -27,6 +29,7 @@ export default function StartScreen({ setGameState, setScore, setNumberOfQuestio
             setQuestions(result.results);
         } catch (error) {
             console.error(error.message)
+            setError(true);
         }
 
         setGameState("QUIZ_ACTIVE");
@@ -51,6 +54,16 @@ export default function StartScreen({ setGameState, setScore, setNumberOfQuestio
 
         getCategories();
     }, []);
+
+    if (error) {
+        return (
+            <div className="screen">
+                <h1>Trivia Game</h1>
+                <p>Error loading categories</p>
+                <button onClick={window.location.reload(false)}></button>
+            </div>
+        )
+    }
 
     if (!categoriesLoaded) {
         return (
