@@ -5,13 +5,20 @@ export default function StartScreen({ setGameState, setScore, setNumberOfQuestio
 
     const [error, setError] = useState(false);
 
+    const titleStyle = "";
+    const textStyle = "w-100 pb-4";
+    const settingsStyle = "flex flex-col gap-4 border-2 border-slate-400 rounded-lg p-4";
+    const settingStyle = "flex flex-row justify-between gap-4";
+    const inputStyle = "bg-transparent placeholder:text-white-700 text-white-900 text-sm border border-slate-200 rounded-md p-1";
+    const selectStyle = "bg-transparent placeholder:text-white-700 text-white-900 text-sm border border-slate-200 rounded-md p-1";
+    const buttonStyle = "bg-transparent placeholder:text-white-700 text-white-900 text-lg border border-slate-200 rounded-md p-1 mt-4 w-full";
+
     const handleStart = async () => {
         const numberOfQuestions = document.querySelector("#number").value;
         const category = document.querySelector("#category").value;
         const difficulty = document.querySelector("#difficulty").value;
         const time = document.querySelector("#time").value;
-
-        setScore(0);
+setScore(0);
 
         setNumberOfQuestions(numberOfQuestions);
         setCategory(category);
@@ -58,9 +65,9 @@ export default function StartScreen({ setGameState, setScore, setNumberOfQuestio
     if (error) {
         return (
             <div className="screen">
-                <h1>Trivia Game</h1>
-                <p>Error loading categories</p>
-                <button onClick={window.location.reload(false)}></button>
+                <h1 className={titleStyle}>Trivia Game</h1>
+                <p className={textStyle}>Error loading categories</p>
+                <button onClick={() => window.location.reload(false)}></button>
             </div>
         )
     }
@@ -68,47 +75,50 @@ export default function StartScreen({ setGameState, setScore, setNumberOfQuestio
     if (!categoriesLoaded) {
         return (
             <div className="screen">
-                <h1>Trivia Game</h1>
-                <p>Loading categories...</p>
+                <h1 className={titleStyle}>Trivia Game</h1>
+                <p className={textStyle}>Loading categories...</p>
             </div>
         )
     }
 
     return (
         <div className="screen">
-            <h1>Trivia Game</h1>
+            <h1 className={titleStyle}>Trivia Game</h1>
+            <p className={textStyle}>Welcome! Please select the number and types of questions you would like, then click Begin to start.</p>
 
-            <div className="setting">
-                <label htmlFor="number">Number of Questions: </label>
-                <input id="number" type="number" defaultValue={5} min={1} max={50}></input>
+            <div className={settingsStyle}>
+                <div className={settingStyle}>
+                    <label htmlFor="number">Number of Questions: </label>
+                    <input className={inputStyle} id="number" type="number" defaultValue={5} min={1} max={50}></input>
+                </div>
+
+                <div className={settingStyle}>
+                    <label htmlFor="time">Time per Question: </label>
+                    <input className={inputStyle} id="time" type="number" defaultValue={15} min={1} max={60}></input>
+                </div>
+
+                <div className={settingStyle}>
+                    <label htmlFor="category">Category: </label>
+                    <select id="category" className={selectStyle}>
+                        <option value="">All</option>
+                        {categories.map((category) => (
+                            <option key={category.id} value={category.id}>{category.name}</option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className={settingStyle}>
+                    <label htmlFor="difficulty">Difficulty: </label>
+                    <select id="difficulty" className={selectStyle}>
+                        <option value="">Any</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
             </div>
 
-            <div className="setting">
-                <label htmlFor="time">Time per Question: </label>
-                <input id="time" type="number" defaultValue={15} min={1} max={60}></input>
-            </div>
-
-            <div className="setting">
-                <label htmlFor="category">Category: </label>
-                <select id="category">
-                    <option value="">All</option>
-                    {categories.map((category) => (
-                        <option key={category.id} value={category.id}>{category.name}</option>
-                    ))}
-                </select>
-            </div>
-
-            <div className="setting">
-                <label htmlFor="difficulty">Difficulty: </label>
-                <select id="difficulty">
-                    <option value="">Any</option>
-                    <option value="easy">Easy</option>
-                    <option value="medium">Medium</option>
-                    <option value="hard">Hard</option>
-                </select>
-            </div>
-
-            <button onClick={handleStart}>Begin</button>
+            <button className={buttonStyle} onClick={handleStart}>Begin</button>
         </div>
     );
 }

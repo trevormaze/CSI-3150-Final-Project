@@ -7,6 +7,17 @@ export default function QuizActive({ setGameState, score, setScore, questions, t
 
     const numberOfQuestions = questions.length
 
+    const titleStyle = "pt-4";
+    const textStyle = "w-100 mb-4 justify-center border-2 border-slate-400 rounded-lg py-2 px-4 text-2xl";
+    const answersStyle = "flex flex-col gap-4 p-4";
+    const answerStyle = "flex flex-row justify-between gap-4 border-2 border-slate-400 rounded-lg px-2 py-1 justify-center font-bold";
+    const inputStyle = "bg-transparent placeholder:text-white-700 text-white-900 text-sm border border-slate-200 rounded-md p-1";
+    const selectStyle = "bg-transparent placeholder:text-white-700 text-white-900 text-sm border border-slate-200 rounded-md p-1";
+    const buttonStyle = "bg-transparent placeholder:text-white-700 text-white-900 text-lg border border-slate-200 rounded-md p-1 mt-4 w-full";
+    const infosStyle = "flex flex-row gap-4 p-4 flex-center items-center justify-center";
+    const categoryStyle = "border-2 border-slate-400 rounded-lg px-2 py-1";
+    const difficultyStyle = "border-2 border-slate-400 rounded-lg px-2 py-1";
+
     const handleAnswer = (isCorrect) => {
         if (isCorrect) {
             setScore(score + 1);
@@ -42,14 +53,18 @@ export default function QuizActive({ setGameState, score, setScore, questions, t
 
     return (
         <div className="screen">
-            <h2>Question {currentQuestionIndex + 1} / {questions.length}</h2>
-            <h3>{makeHTML(question.question)} | {question.category} | {question.difficulty}</h3>
+            <h2 className={titleStyle}>Question {currentQuestionIndex + 1} / {questions.length}</h2>
+            <div className={infosStyle}>
+                <h3 className={categoryStyle}>{question.category}</h3>
+                <h3 className={difficultyStyle}>{question.difficulty.toUpperCase()}</h3>
+            </div>
+            <h3 className={textStyle}>{makeHTML(question.question)}</h3>
             
             <Timer onTimeOut={handleTimeOut} currentQuestionIndex={currentQuestionIndex} timePerQuestion={timePerQuestion} />
             
-            <div className="answers">
+            <div className={answersStyle}>
                 {answers.map((answer, index) => (
-                    <button key={index} onClick={() => handleAnswer(answer.correct)}>{answer.correct ? "*" : ""}{makeHTML(answer.text)}</button>
+                    <button className={answerStyle} key={index} onClick={() => handleAnswer(answer.correct)}>{answer.correct ? "*" : ""}{makeHTML(answer.text)}</button>
                 ))}
             </div>
         </div>
