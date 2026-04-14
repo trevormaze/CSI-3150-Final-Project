@@ -7,11 +7,11 @@ export default function StartScreen({ setGameState, setScore, setNumberOfQuestio
     const [error, setError] = useState(false);
 
     const titleStyle = "";
-    const textStyle = "w-100 pb-4 text-gray-200";
-    const settingsStyle = "flex flex-col gap-4 border-2 border-slate-400 rounded-lg p-4 bg-gray-900";
-    const settingStyle = "flex flex-row justify-between gap-4";
-    const inputStyle = "bg-gray-950 placeholder:text-gray-100 text-gray-200 text-sm border border-slate-200 rounded-md p-1";
-    const selectStyle = "bg-gray-950 placeholder:text-gray-100 text-gray-200 text-sm border border-slate-200 rounded-md p-1";
+    const textStyle = "w-full pb-4 text-gray-200";
+    const settingsStyle = "flex flex-col gap-4 border-2 border-slate-400 rounded-lg p-4 bg-gray-900 w-full box-border";
+    const settingStyle = "flex flex-row justify-between gap-4 w-full";
+    const inputStyle = "bg-gray-950 placeholder:text-gray-100 text-gray-200 text-sm border border-slate-200 rounded-md p-1 w-20 sm:w-28 text-center";
+    const selectStyle = "bg-gray-950 placeholder:text-gray-100 text-gray-200 text-sm border border-slate-200 rounded-md p-1 w-28 sm:w-32";
     const buttonStyle = "bg-gray-950 placeholder:text-gray-100 text-gray-200 text-lg border border-slate-200 rounded-md p-1 mt-4 w-full bg-gray-900";
 
     const handleStart = async () => {
