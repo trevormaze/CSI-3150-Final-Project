@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Leaderboard from "./Leaderboard";
 export default function StartScreen({ setGameState, setScore, setNumberOfQuestions, setCategory, setDifficulty, setQuestions, setTimePerQuestion }) {
     const [categoriesLoaded, setCategoriesLoaded] = useState(false);
     const [categories, setCategories] = useState([]);
@@ -6,12 +7,12 @@ export default function StartScreen({ setGameState, setScore, setNumberOfQuestio
     const [error, setError] = useState(false);
 
     const titleStyle = "";
-    const textStyle = "w-100 pb-4";
-    const settingsStyle = "flex flex-col gap-4 border-2 border-slate-400 rounded-lg p-4";
+    const textStyle = "w-100 pb-4 text-gray-200";
+    const settingsStyle = "flex flex-col gap-4 border-2 border-slate-400 rounded-lg p-4 bg-gray-900";
     const settingStyle = "flex flex-row justify-between gap-4";
-    const inputStyle = "bg-transparent placeholder:text-white-700 text-white-900 text-sm border border-slate-200 rounded-md p-1";
-    const selectStyle = "bg-transparent placeholder:text-white-700 text-white-900 text-sm border border-slate-200 rounded-md p-1";
-    const buttonStyle = "bg-transparent placeholder:text-white-700 text-white-900 text-lg border border-slate-200 rounded-md p-1 mt-4 w-full";
+    const inputStyle = "bg-gray-950 placeholder:text-gray-100 text-gray-200 text-sm border border-slate-200 rounded-md p-1";
+    const selectStyle = "bg-gray-950 placeholder:text-gray-100 text-gray-200 text-sm border border-slate-200 rounded-md p-1";
+    const buttonStyle = "bg-gray-950 placeholder:text-gray-100 text-gray-200 text-lg border border-slate-200 rounded-md p-1 mt-4 w-full bg-gray-900";
 
     const handleStart = async () => {
         const numberOfQuestions = document.querySelector("#number").value;
@@ -35,10 +36,13 @@ setScore(0);
 
             setQuestions(result.results);
         } catch (error) {
+            console.log("Fail")
             console.error(error.message)
             setError(true);
+            return
         }
 
+        new Audio("click.mp3").play();
         setGameState("QUIZ_ACTIVE");
     };
 
@@ -56,6 +60,7 @@ setScore(0);
                 setCategoriesLoaded(true);
             } catch (error) {
                 console.error(error.message)
+                setError(true)
             }
         }
 
@@ -66,8 +71,8 @@ setScore(0);
         return (
             <div className="screen">
                 <h1 className={titleStyle}>Trivia Game</h1>
-                <p className={textStyle}>Error loading categories</p>
-                <button onClick={() => window.location.reload(false)}></button>
+                <p className={textStyle}>Error loading trivia questions</p>
+                <button className={buttonStyle} onClick={() => window.location.reload(false)}>Retry</button>
             </div>
         )
     }
@@ -119,6 +124,9 @@ setScore(0);
             </div>
 
             <button className={buttonStyle} onClick={handleStart}>Begin</button>
+
+            <br className="my-8" />
+            <Leaderboard />
         </div>
     );
 }
