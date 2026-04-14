@@ -76,7 +76,7 @@ export default function QuizActive({ setGameState, score, setScore, questions, t
             
             <div className={answersStyle}>
                 {answers.map((answer, index) => (
-                    <button className={answerStyle} key={index} onClick={() => handleAnswer(answer.correct)}>{answer.correct ? "*" : ""}{makeHTML(answer.text)}</button>
+                    <button className={answerStyle} key={index} onClick={() => handleAnswer(answer.correct)}>{answer.correct ? "" : ""}{makeHTML(answer.text)}</button>
                 ))}
             </div>
         </div>
