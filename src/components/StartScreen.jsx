@@ -70,7 +70,7 @@ setScore(0);
     if (error) {
         return (
             <div className="screen">
-                <h1 className={titleStyle}>Trivia Game</h1>
+                <h1 className={titleStyle}>A Trivial Quiz</h1>
                 <p className={textStyle}>Error loading trivia questions</p>
                 <button className={buttonStyle} onClick={() => window.location.reload(false)}>Retry</button>
             </div>
@@ -80,7 +80,7 @@ setScore(0);
     if (!categoriesLoaded) {
         return (
             <div className="screen">
-                <h1 className={titleStyle}>Trivia Game</h1>
+                <h1 className={titleStyle}>A Trivial Quiz</h1>
                 <p className={textStyle}>Loading categories...</p>
             </div>
         )
@@ -88,8 +88,8 @@ setScore(0);
 
     return (
         <div className="screen">
-            <h1 className={titleStyle}>Trivia Game</h1>
-            <p className={textStyle}>Welcome! Please select the number and types of questions you would like, then click Begin to start.</p>
+            <h1 className={titleStyle}>A Trivial Quiz</h1>
+            <p className={textStyle}>Select the number of questions, time per question, category, and difficulty, then click Begin to start.</p>
 
             <div className={settingsStyle}>
                 <div className={settingStyle}>
