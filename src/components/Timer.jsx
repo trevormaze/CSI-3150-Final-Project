@@ -4,7 +4,7 @@ export default function Timer({ onTimeOut, currentQuestionIndex, timePerQuestion
     const [timeLeft, setTimeLeft] = useState(timePerQuestion);
 
     useEffect(() => {
-        setTimeLeft(15);
+        setTimeLeft(timePerQuestion);
 
         const intervalId = setInterval(() => {
             setTimeLeft((previousTime) => (previousTime > 0 ? previousTime - 1 : 0));
